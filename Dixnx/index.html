@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mi Página — Inicio · Quién soy · Experiencia · Hobbies · Criptografía · Mi llave</title>
+    <meta name="description"
+        content="Sitio personal con secciones de Inicio, Quién soy, Mi experiencia, Hobbies, Criptografía y Mi llave. Paleta morada." />
+    <meta name="theme-color" content="#6D28D9" />
+    <style>
+        :root {
+            --p950: #2e1065;
+            --p900: #4C1D95;
+            --p800: #5B21B6;
+            --p700: #6D28D9;
+            --p600: #7C3AED;
+            --p500: #8B5CF6;
+            --p400: #A78BFA;
+            --p200: #DDD6FE;
+            --p100: #EDE9FE;
+            --p50: #F5F3FF;
+            --bg: #ffffff;
+            --text: #111827;
+            --muted: #6b7280;
+            --border: #e5e7eb;
+            --radius: 14px;
+            --shadow: 0 10px 30px rgba(109, 40, 217, .18);
+            accent-color: var(--p600);
+            scroll-behavior: smooth;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.6
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(255, 255, 255, .85);
+            backdrop-filter: blur(6px);
+            border-bottom: 1px solid var(--border)
+        }
+
+        .wrap {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 1rem
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: .75rem 0
+        }
+
+        .brand {
+            display: flex;
+            gap: .6rem;
+            align-items: center;
+            font-weight: 800
+        }
+
+        .logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            color: #fff;
+            background: radial-gradient(100% 100% at 25% 10%, var(--p400), var(--p700) 60%, var(--p900) 100%);
+            box-shadow: 0 4px 16px rgba(109, 40, 217, .18)
+        }
+
+        nav a {
+            display: inline-block;
+            padding: .5rem .75rem;
+            border-radius: 10px;
+            color: #374151;
+            font-weight: 600;
+            text-decoration: none
+        }
+
+        nav a:hover,
+        nav a.active {
+            background: var(--p100);
+            color: var(--p900)
+        }
+
+        .burger {
+            display: none;
+            border: 1px solid var(--border);
+            background: #fff;
+            padding: .4rem .55rem;
+            border-radius: 10px
+        }
+
+        @media (max-width:800px) {
+            .burger {
+                display: block
+            }
+
+            nav {
+                position: fixed;
+                inset: auto 0 0 0;
+                background: #fff;
+                border-top: 1px solid var(--border);
+                translate: 0 100%;
+                transition: translate .25s ease;
+                display: grid;
+                gap: .25rem;
+                padding: 1rem
+            }
+
+            nav.open {
+                translate: 0 0
+            }
+
+            nav a {
+                padding: 1rem
+            }
+        }
+
+        .hero {
+            padding: clamp(2rem, 5vw, 4rem) 0;
+            background:
+                radial-gradient(1100px 400px at 85% -10%, var(--p100), transparent 60%),
+                radial-gradient(900px 400px at 10% -10%, var(--p50), transparent 60%),
+                #fff
+        }
+
+        .hero-grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: 1.2fr 1fr;
+            align-items: center
+        }
+
+        @media (max-width:900px) {
+            .hero-grid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.1;
+            margin: .2rem 0 1rem
+        }
+
+        .lead {
+            color: #4b5563
+        }
+
+        .cover {
+            aspect-ratio: 16/9;
+            border: 2px dashed var(--p300, #C4B5FD);
+            border-radius: 16px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(180deg, #fff, var(--p50));
+            box-shadow: var(--shadow)
+        }
+
+        .cover p {
+            color: #6b7280;
+            margin: 0
+        }
+
+        .cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 14px;
+        }
+
+        section {
+            padding: 1rem;
+            scroll-margin-top: 80px
+        }
+
+        .title {
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            margin: 0 0 .75rem
+        }
+
+        .muted {
+            color: var(--muted)
+        }
+
+        .cta-grid {
+            display: flex;
+            gap: .8rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: stretch;
+        }
+
+        @media (max-width:900px) {
+            .cta-grid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .cta-card {
+            position: relative;
+            width: 200px;
+            height: 180px;
+            border: 1px solid var(--border, #e5e7eb);
+            border-radius: 16px;
+            overflow: hidden;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            box-shadow: var(--shadow, 0 10px 30px rgba(121, 88, 175, 0.18));
+            transform: scale(1);
+            transition: transform .15s ease;
+        }
+
+        .cta-card:hover,
+        .cta-card:focus-visible {
+            transform: scale(1.06)
+        }
+
+        .cta-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, .45));
+        }
+
+        .cta-card span {
+            position: relative;
+            z-index: 1;
+            color: #fff;
+            font-size: larger;
+            font-weight: 900;
+        }
+
+        .cta-card.hobbies {
+            background-image: url("https://i.pinimg.com/736x/e2/89/03/e28903a46eccdc1f7c4ce276c8cf9ab2.jpg");
+        }
+
+        .cta-card.cripto {
+            background-image: url("https://i.pinimg.com/736x/e3/93/ae/e393ae3d11f3b1cbf536135484923c7e.jpg");
+        }
+
+        .cta-card.llave {
+            background-image: url("https://i.pinimg.com/736x/3b/a7/cf/3ba7cf49c12f26d13a191bddf390a608.jpg");
+        }
+
+        .grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(4, 1fr)
+        }
+
+        @media (max-width:1000px) {
+            .grid {
+                grid-template-columns: repeat(3, 1fr)
+            }
+        }
+
+        @media (max-width:700px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+        }
+
+        @media (max-width:480px) {
+            .grid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .mini-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .mini-card {
+            display: block;
+            background: #1b1030;
+            border: 1px solid #7c3aed30;
+            border-radius: 10px;
+            padding: 10px;
+            text-decoration: none;
+            transition: transform .15s ease, border-color .2s ease;
+        }
+
+        .mini-card:hover {
+            transform: translateY(-2px);
+            border-color: #a78bfa70;
+        }
+
+        .mini-card img {
+            width: 100%;
+            aspect-ratio: 2 / 3;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .mini-card h4 {
+            margin: 8px 0 6px;
+            font-size: .95rem;
+            color: #e9d5ff;
+        }
+
+        .mini-card .rt {
+            font: 600 .8rem/1 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+            color: #a78bfa;
+            background: #a78bfa1a;
+            border: 1px solid #a78bfa40;
+            padding: 2px 8px;
+            border-radius: 999px;
+            display: inline-block;
+        }
+
+        @media (max-width: 560px) {
+            .mini-grid {
+                grid-template-columns: none;
+                grid-auto-flow: column;
+                grid-auto-columns: 80%;
+                overflow-x: auto;
+                padding-bottom: 6px;
+                scroll-snap-type: x mandatory;
+            }
+
+            .mini-grid .mini-card {
+                scroll-snap-align: start;
+            }
+        }
+
+        .card {
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1rem;
+            background: #fff;
+            box-shadow: var(--shadow)
+        }
+
+        .badge {
+            display: inline-block;
+            padding: .25rem .55rem;
+            border-radius: 999px;
+            background: var(--p100);
+            color: var(--p900);
+            font-weight: 700;
+            font-size: .8rem
+        }
+
+        details {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: .8rem 1rem;
+            background: #fff
+        }
+
+        details+details {
+            margin-top: .6rem
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 700
+        }
+
+        ul {
+            margin: .5rem 0 .5rem 1rem
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2rem 0;
+            background: linear-gradient(180deg, #fff, var(--p50));
+            color: #6b7280
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="wrap nav">
+            <div class="brand">
+                <div class="logo">
+                    <3 </div> <span>Mi Página</span>
+                </div>
+                <button class="burger" id="burger" aria-expanded="false" aria-controls="menu">☰</button>
+                <nav id="menu" aria-label="Navegación">
+                    <a href="#inicio">Inicio</a>
+                    <a href="#mi-llave">Mi llave</a>
+                </nav>
+            </div>
+    </header>
+
+    <section id="inicio" class="hero">
+        <div class="wrap hero-grid">
+            <div class="cover" aria-label="Portada / foto de portada">
+                <img src="portada.png" alt="Portada de Diana">
+            </div>
+            <div>
+                <h1>¡Hola! Soy <span style="color:var(--p700)">Diana</span></h1>
+                <h2>Tengo 22 años y nací el 26/03/2003.</h2>
+                <h2>Mi color favorito es el morado 💜.</h2>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="wrap cta-grid">
+            <a class="cta-card hobbies" href="#hobbies"><span>Hobbies</span></a>
+            <a class="cta-card cripto" href="#criptografia"><span>Criptografía</span></a>
+            <a class="cta-card llave" href="#mi-llave"><span>Mi llave</span></a>
+        </div>
+    </section>
+
+
+    <section id="quien-soy">
+        <div class="wrap">
+            <h2 class="title">Quién soy</h2>
+            <p class="muted">Soy una persona alegre, con creatividad y pasión por la tecnología y los retos. Persevero,
+                no me rindo y enfrento cada situación con actitud positiva. Aprendo de mis errores y busco mejorar cada
+                día, en lo personal y en lo profesional.</p>
+        </div>
+    </section>
+
+    <section id="experiencia">
+        <div class="wrap">
+            <h2 class="title">Experiencia:</h2>
+            <h3>Escolar</h3>
+            <p class="muted">Estudiante de Ingeniería en Sistemas Computacionales en la ESCOM-IPN [2021-Actualidad].</p>
+            <p class="muted">Técnico en Informática en el CECyT #13 [2018-2021]</p>
+            <p class="muted">Consejera General del área Ciencias Sociales y Administrativas [2020-2021].</p>
+            <h3>Laboral</h3>
+            <p class="muted">Desarrolladora Front-End en BADAK [Actualidad].</p>
+        </div>
+    </section>
+
+    <section id="hobbies">
+        <div class="wrap">
+            <h2 class="title">Mis Hobbies</h2>
+            <p class="muted">Soy amante de la danza folklórica desde los 5 años, por falta de tiempo he tenido que
+                dejarla un poco eso de lado desde ya hace bastante, sin embargo, sigo disfrutando de la música y el
+                baile en
+                mi tiempo libre aunque sea de forma distinta. Considero que mis gustos son demasiado versátiles
+                y me gusta explorar diferentes géneros y estilos.</p>
+
+            <div class="card">
+                <span class="badge">Lecturas favoritas</span>
+                <div style="margin-top:.8rem">
+                    <div class="mini-grid">
+                        <a class="mini-card" href="https://www.rottentomatoes.com/" target="_blank" rel="noopener">
+                            <img src="https://upload.wikimedia.org/wikipedia/en/e/e4/It_Ends_with_Us_%28Colleen_Hoover%29.png"
+                                alt="Portada: It Ends with Us">
+                            <h4>Romper el círculo</h4>
+                        </a>
+                        <a class="mini-card" href="https://www.rottentomatoes.com/" target="_blank" rel="noopener">
+                            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/54/Eleanor_park_book_cover.jpg/250px-Eleanor_park_book_cover.jpg"
+                                alt="Portada: Eleanor & Park">
+                            <h4>Eleanor &amp; Park</h4>
+                        </a>
+                        <a class="mini-card" href="https://www.rottentomatoes.com/" target="_blank" rel="noopener">
+                            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Atomic%20habits.jpg"
+                                alt="Portada: Atomic Habits">
+                            <h4>Hábitos Atómicos</h4>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="badge">Series</span>
+                <div style="margin-top:.8rem">
+                    <div class="mini-grid">
+                        <a class="mini-card" href="https://www.rottentomatoes.com/tv/game_of_thrones" target="_blank"
+                            rel="noopener">
+                            <img src="https://m.media-amazon.com/images/M/MV5BMTNhMDJmNmYtNDQ5OS00ODdlLWE0ZDAtZTgyYTIwNDY3OTU3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                                alt="Logo: Game of Thrones">
+                            <h4>Game of Thrones</h4>
+                            <div class="rt">RT: 89%</div>
+                        </a>
+                        <a class="mini-card" href="https://www.rottentomatoes.com/" target="_blank" rel="noopener">
+                            <img src="https://i.etsystatic.com/38964058/r/il/263027/4834600801/il_1080xN.4834600801_52df.jpg"
+                                alt="Logo: Yo soy Betty, la fea">
+                            <h4>Betty la fea</h4>
+                            <div class="rt">RT: N/A</div>
+                        </a>
+                        <a class="mini-card" href="https://www.rottentomatoes.com/tv/once_upon_a_time" target="_blank"
+                            rel="noopener">
+                            <img src="https://static1.cbrimages.com/wordpress/wp-content/uploads/sharedimages/2024/04/once-upon-a-time-poster.jpg?q=49&fit=contain&w=480&dpr=2"
+                                alt="Logo: Once Upon a Time">
+                            <h4>Once Upon a Time</h4>
+                            <div class="rt">RT: 78%</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="badge">Películas</span>
+                <div style="margin-top:.8rem">
+                    <div class="mini-grid">
+                        <a class="mini-card" href="https://www.rottentomatoes.com/m/10_things_i_hate_about_you"
+                            target="_blank" rel="noopener">
+                            <img src="https://en.wikipedia.org/wiki/Special:FilePath/10_Things_I_Hate_About_You_film.jpg"
+                                alt="Póster: 10 cosas que odio de ti">
+                            <h4>10 cosas que odio de ti</h4>
+                            <div class="rt">RT: 71%</div>
+                        </a>
+                        <a class="mini-card" href="https://www.rottentomatoes.com/m/mulan" target="_blank"
+                            rel="noopener">
+                            <img src="https://en.wikipedia.org/wiki/Special:FilePath/Movie_poster_mulan.JPG"
+                                alt="Póster: Mulan (1998)">
+                            <h4>Mulan (1998)</h4>
+                            <div class="rt">RT: 86%</div>
+                        </a>
+                        <a class="mini-card" href="https://www.rottentomatoes.com/m/the_hunger_games" target="_blank"
+                            rel="noopener">
+                            <img src="https://en.wikipedia.org/wiki/Special:FilePath/HungerGamesPoster.jpg"
+                                alt="Póster: Los juegos del hambre (2012)">
+                            <h4>Los juegos del hambre</h4>
+                            <div class="rt">RT: 84%</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="badge">Juegos</span>
+                <div style="margin-top:.8rem">
+                    <div class="mini-grid">
+                        <a class="mini-card" href="https://www.rottentomatoes.com/" target="_blank" rel="noopener">
+                            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Pok%C3%A9mon_GO_logo.svg"
+                                alt="Logo: Pokémon GO">
+                            <h4>Pokémon GO</h4>
+                        </a>
+                        <a class="mini-card" href="https://www.rottentomatoes.com/" target="_blank" rel="noopener">
+                            <img src="https://en.wikipedia.org/wiki/Special:FilePath/Slime_Rancher_cover_art.png"
+                                alt="Carátula: Slime Rancher">
+                            <h4>Slime Rancher</h4>
+                        </a>
+                        <a class="mini-card" href="https://www.rottentomatoes.com/" target="_blank" rel="noopener">
+                            <img src="https://en.wikipedia.org/wiki/Special:FilePath/DBFZ_cover_art.jpg"
+                                alt="Carátula: Dragon Ball FighterZ">
+                            <h4>Dragon Ball FighterZ</h4>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="badge">Animes</span>
+                <div style="margin-top:.8rem">
+                    <div class="mini-grid">
+                        <a class="mini-card" href="https://www.rottentomatoes.com/" target="_blank" rel="noopener">
+                            <img src="https://assets.mycast.io/posters/sword-art-online-fan-casting-poster-150709-large.jpg?1638593937"
+                                alt="Sword Art Online">
+                            <h4>Sword Art Online</h4>
+                        </a>
+                        <a class="mini-card" href="https://www.rottentomatoes.com/" target="_blank" rel="noopener">
+                            <img src="https://i.bobopic.com/small/302189_SfN7e.png" alt="86 (anime)">
+                            <h4>86</h4>
+                        </a>
+                        <a class="mini-card" href="https://www.rottentomatoes.com/" target="_blank" rel="noopener">
+                            <img src="https://comicbook.com/wp-content/uploads/sites/4/2025/02/Anne-Shirley-Anime-Poster.jpeg"
+                                alt="Akage no Anne (Anne of Green Gables, 1979)">
+                            <h4>Anne Shirley</h4>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="criptografia">
+        <div class="wrap">
+            <h2 class="title">Criptografía — Datos curiosos de mujeres poco conocidas</h2>
+            <p class="muted">Pequeñas cápsulas históricas sobre criptógrafas y criptoanalistas menos visibles.</p>
+
+            <details open>
+                <summary>Genevieve Grotjan (Feinstein)</summary>
+                <ul>
+                    <li>El <strong>20 de septiembre de 1940</strong> identificó un patrón clave que permitió atacar el
+                        cifrador diplomático japonés <em>PURPLE</em>; a partir de esto, el SIS construyó una máquina
+                        equivalente para leer mensajes diplomáticos japoneses. :contentReference[oaicite:0]{index=0}
+                    </li>
+                    <li>Más tarde trabajó en <em>VENONA</em>; desarrolló un método para detectar <em>reuso de
+                            clave</em>, considerado “el avance más importante” de todo el proyecto.
+                        :contentReference[oaicite:1]{index=1}</li>
+                </ul>
+            </details>
+
+            <details>
+                <summary>Agnes Meyer Driscoll</summary>
+                <ul>
+                    <li>Apodada la <strong>“Primera Dama de la Criptología Naval”</strong>; rompió múltiples sistemas
+                        japoneses como los códigos <em>Red</em> y <em>Blue</em>, y lideró el ataque a la máquina M-1
+                        (ORANGE). :contentReference[oaicite:2]{index=2}</li>
+                    <li>No solo resolvía sistemas manuales: también <strong>co-desarrolló una máquina de
+                            cifrado</strong> usada por la Marina de EE. UU. en los años 20.
+                        :contentReference[oaicite:3]{index=3}</li>
+                </ul>
+            </details>
+
+            <details>
+                <summary>Ann Z. Caracristi</summary>
+                <ul>
+                    <li>Experta en reconstrucción de <em>libretas de códigos</em>; formó parte del equipo que leyó
+                        sistemas japoneses y estuvo entre las primeras personas en enterarse de la <strong>rendición de
+                            Japón (14 de agosto de 1945)</strong> gracias a un descifrado.
+                        :contentReference[oaicite:4]{index=4}</li>
+                    <li>Primera mujer ascendida al grado <strong>GS-18</strong> en la NSA (1975) y <strong>primera
+                            Subdirectora</strong> de la agencia (1980–1982). :contentReference[oaicite:5]{index=5}</li>
+                </ul>
+            </details>
+        </div>
+    </section>
+
+    <section id="mi-llave">
+        <div class="wrap">
+            <h2 class="title">Mi llave</h2>
+            <div class="card">[...]</div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="wrap">© <span id="year"></span> · Hecho con amor y morado</div>
+    </footer>
+
+    <script>
+        const burger = document.getElementById('burger');
+        const menu = document.getElementById('menu');
+        burger?.addEventListener('click', () => {
+            const open = menu.classList.toggle('open');
+            burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        const links = [...menu.querySelectorAll('a')];
+        const secs = links.map(l => document.querySelector(l.getAttribute('href')));
+        const onScroll = () => {
+            const y = scrollY + 120; let idx = 0;
+            secs.forEach((s, i) => { if (s && s.offsetTop <= y) idx = i; });
+            links.forEach((l, i) => l.classList.toggle('active', i === idx));
+        };
+        document.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>
